@@ -1,0 +1,19 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:SuperYahtzee.Controls" x:Class="SuperYahtzee.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+
+        <controls:PiceUC  Margin="26,44,341,125" Padding="5"  VerticalAlignment="Center" HorizontalAlignment="Center" MinHeight="75" MinWidth="75" DataContext="{Binding PiceUC}" Height="150" Width="150" />
+        <controls:Pice HorizontalAlignment="Left" Height="54" Margin="211,21,0,0" VerticalAlignment="Top" Width="50" Radius="7" >
+
+        </controls:Pice>
+        <Button x:Name="Button"  Content="Start/Stop" HorizontalAlignment="Left" Margin="88,225,0,0" VerticalAlignment="Top" Width="75" Command="{Binding StartStopCommand}" />
+        <controls:Pices HorizontalAlignment="Stretch" Margin="181,75,0,0" VerticalAlignment="Stretch"  />
+
+    </Grid>
+</Window>
