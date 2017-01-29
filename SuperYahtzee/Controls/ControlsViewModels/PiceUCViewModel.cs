@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Prism.Mvvm;
@@ -6,11 +7,20 @@ using Prism.Mvvm;
 
 namespace SuperYahtzee.Controls.ControlsViewModels
 {
-    public class PiceUCViewModel : BindableBase
+    internal class PiceUCViewModel : BindableBase
     {
         private int _value = 3;
 
         private Brush _bgColor = new SolidColorBrush() {Color=Colors.CadetBlue};
+
+
+        private double _angle;
+
+        public double Angle
+        {
+            get { return _angle; }
+            set { SetProperty(ref _angle, value); }
+        }
 
         public Brush BgColor
         {
@@ -30,7 +40,10 @@ namespace SuperYahtzee.Controls.ControlsViewModels
             }
         }
 
-
+        public PiceUCViewModel()
+        {
+            Angle = 0;
+        }
 
         public void StartRandom()
         {
@@ -39,16 +52,20 @@ namespace SuperYahtzee.Controls.ControlsViewModels
             int ticks = rnd.Next(10, 20);
             BgColor = new SolidColorBrush() { Color = Colors.DarkOrange };
             var timer = new DispatcherTimer();
+            double angelOffset = 360 / ticks;
             timer.Tick += delegate
             {
                 Value = rnd.Next(1, 7);
+                Angle += angelOffset;
                 ticks--;
                 if (ticks <= 0)
                 {
                     timer.Stop();
+                    Angle = 0;
                     BgColor = currentBgColor;
                 }
             };
+            
             timer.Interval = TimeSpan.FromMilliseconds(100);
             timer.Start();
 

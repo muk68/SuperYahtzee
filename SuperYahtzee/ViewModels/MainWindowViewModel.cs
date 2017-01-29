@@ -1,16 +1,13 @@
 ﻿
-using System;
-using System.Threading;
-using Microsoft.Practices.Unity;
+
 using Prism.Commands;
 using Prism.Mvvm;
-using SuperYahtzee.Annotations;
 using SuperYahtzee.Controls.ControlsViewModels;
 
 namespace SuperYahtzee.ViewModels
 {
 
-    public class MainWindowViewModel : BindableBase
+    internal class MainWindowViewModel : BindableBase
     {
         public DelegateCommand<object> StartStopCommand { get; }
         
@@ -39,7 +36,7 @@ namespace SuperYahtzee.ViewModels
             //}
             //PiceUC.Number=1;
             PiceUC.StartRandom();
-            PiceUC.Value = 1;
+            //PiceUC.Value = 1;
         }
         #endregion
 
