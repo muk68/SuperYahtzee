@@ -22,6 +22,13 @@ namespace SuperYahtzee.Controls.ControlsViewModels
             set { SetProperty(ref _angle, value); }
         }
 
+        private bool _visible;
+        public bool Visible
+        {
+            get { return _visible; }
+            set { SetProperty(ref _visible, value); }
+        }
+
         public Brush BgColor
         {
             get { return _bgColor; }
@@ -43,6 +50,7 @@ namespace SuperYahtzee.Controls.ControlsViewModels
         public PiceUCViewModel()
         {
             Angle = 0;
+            Visible = true;
         }
 
         public void StartRandom()

@@ -21,15 +21,16 @@
         <local:PercentageConverter x:Key="PercentageConverter"/>
         <local:BullPositionConverter x:Key="PositionConverter"/>
         <local:VisibilityPiceConverter x:Key="VisibilityPiceConverter" />
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
         <sys:Double x:Key="BullSizeFactor">0.25</sys:Double>
     </UserControl.Resources>
-    <Border   BorderThickness="0,0,0,0" CornerRadius="8" Padding="0" Margin="4" Background="Black">
+    <Border   BorderThickness="0,0,0,0" CornerRadius="8" Padding="0" Margin="4" Background="Black" Visibility="{Binding Path=Visible, Converter={StaticResource booleanToVisibilityConverter}}">
         <Border.LayoutTransform>
             <RotateTransform CenterX="0.5" CenterY="0.5" Angle="{Binding Path=Angle, UpdateSourceTrigger=PropertyChanged}"/>
         </Border.LayoutTransform>
-        <Border   BorderThickness="0,0,0,0" CornerRadius="8" Padding="0" Margin="1" Background="#FF0D84BB">
-            <Border   BorderThickness="0,0,0,0" CornerRadius="8" Padding="4" Margin="1" Background="{Binding BgColor}">
-                <Canvas Background="{Binding BgColor}" x:Name="Canvas"  >
+        <Border   BorderThickness="0,0,0,0" CornerRadius="8" Padding="0" Margin="1" Background="#FF0D84BB" Visibility="{Binding Path=Visible, Converter={StaticResource booleanToVisibilityConverter}}">
+            <Border   BorderThickness="0,0,0,0" CornerRadius="8" Padding="4" Margin="1" Background="{Binding BgColor}" Visibility="{Binding Path=Visible, Converter={StaticResource booleanToVisibilityConverter}}">
+                <Canvas Background="{Binding BgColor}" x:Name="Canvas" Visibility="{Binding Path=Visible, Converter={StaticResource booleanToVisibilityConverter}}" >
                     <Ellipse Name="LeftTopBull" Fill="{DynamicResource PiceEyeBrush}"
                               Height="{Binding Converter={StaticResource PercentageConverter},ElementName=Canvas, Path=ActualHeight, ConverterParameter={StaticResource BullSizeFactor}}" 
                               Width="{Binding Converter={StaticResource PercentageConverter},ElementName=Canvas, Path=ActualWidth, ConverterParameter={StaticResource BullSizeFactor}}">
