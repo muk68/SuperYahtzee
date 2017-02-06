@@ -39,6 +39,7 @@ namespace SuperYahtzee.ViewModels
             //}
             //PiceUC.Number=1;
             PiceUC.StartRandom();
+            Pices.StartRandom();
             //PiceUC.Value = 1;
         }
         #endregion

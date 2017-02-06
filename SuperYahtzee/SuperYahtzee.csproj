@@ -104,6 +104,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstraper.cs" />
+    <Compile Include="Common\IsRunningRandomizerEvent.cs" />
     <Compile Include="Controls\MarginConverter.cs" />
     <Compile Include="Controls\ControlsViewModels\PicesViewModel.cs" />
     <Compile Include="Controls\VisibilityPiceConverter.cs" />

@@ -10,6 +10,7 @@
              xmlns:mvvm="http://prismlibrary.com/"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance controlsViewModels:PicesViewModel, IsDesignTimeCreatable=True}"
+             AllowDrop="True"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <local:PercentageConverter x:Key="PercentageConverter"/>
@@ -17,29 +18,35 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" Name="HeaderRow"/>
+            <RowDefinition Height="{Binding ActualHeight, ElementName=ShakerPice1}"  MinHeight="50" Name="HeaderRow"/>
             <RowDefinition Height="*" Name="MainRow"/>
             <RowDefinition Height="20" Name="FooterRow"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" Name="Column1"></ColumnDefinition>
-            <ColumnDefinition Width="1*" Name="Column2"></ColumnDefinition>
-            <ColumnDefinition Width="1*" Name="Column3"></ColumnDefinition>
-            <ColumnDefinition Width="1*" Name="Column4"></ColumnDefinition>
-            <ColumnDefinition Width="1*" Name="Column5"></ColumnDefinition>
+            <ColumnDefinition Width="*" Name="Column0"></ColumnDefinition>
+            <ColumnDefinition Width="{Binding ActualWidth, ElementName=ShakerPice1}" MinWidth="50" Name="Column1" />
+            <ColumnDefinition Width="{Binding ActualWidth, ElementName=ShakerPice2}" MinWidth="50" Name="Column2" />
+            <ColumnDefinition Width="{Binding ActualWidth, ElementName=ShakerPice3}" MinWidth="50" Name="Column3" />
+            <ColumnDefinition Width="{Binding ActualWidth, ElementName=ShakerPice4}" MinWidth="50" Name="Column4" />
+            <ColumnDefinition Width="{Binding ActualWidth, ElementName=ShakerPice5}" MinWidth="50" Name="Column5" />
+            <ColumnDefinition Width="*" Name="Column6"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <local:PiceUC x:Name="Pice1" Number="{Binding PiceUcS1.Value}" Grid.Column="0"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
+        <local:PiceUC x:Name="Pice1" DataContext="{Binding PiceUcS1}" Number="{Binding Value}" Grid.Column="1"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Margin="0" />
-        <local:PiceUC x:Name="Pice2" Number="{Binding PiceUcS2.Value}" Grid.Column="1"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
+        <local:PiceUC x:Name="Pice2" DataContext="{Binding PiceUcS2}" Number="{Binding Value}" Grid.Column="2"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Margin="0" />
-        <local:PiceUC x:Name="Pice3" Number="{Binding PiceUcS3.Value}" Grid.Column="2"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
+        <local:PiceUC x:Name="Pice3" DataContext="{Binding PiceUcS3}" Number="{Binding Value}" Grid.Column="3"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Margin="0" />
-        <local:PiceUC x:Name="Pice4" Number="{Binding PiceUcS4.Value}" Grid.Column="3"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
+        <local:PiceUC x:Name="Pice4" DataContext="{Binding PiceUcS4}" Number="{Binding Value}" Grid.Column="4"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Margin="0" />
-        <local:PiceUC x:Name="Pice5" Number="{Binding PiceUcS5.Value}" Grid.Column="4"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
+        <local:PiceUC x:Name="Pice5" DataContext="{Binding PiceUcS5}" Number="{Binding Value}" Grid.Column="5"  Grid.Row="0" Padding="3" VerticalAlignment="Stretch" HorizontalAlignment="Center"   
         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Margin="0" />
-        <Ellipse Name="Shaker" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Fill="LightGreen"  Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"  VerticalAlignment="Stretch" />
-        <local:PiceUC x:Name="ShakerPice1" Number="{Binding PiceUcW1.Value}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+        <Ellipse Name="Shaker" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Fill="LightGreen"  Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"  VerticalAlignment="Stretch" >
+            <Ellipse.LayoutTransform>
+                <RotateTransform CenterX="0.5" CenterY="0.5" Angle="{Binding Path=Angle, UpdateSourceTrigger=PropertyChanged}"/>
+            </Ellipse.LayoutTransform>
+        </Ellipse>
+        <local:PiceUC x:Name="ShakerPice1" DataContext="{Binding PiceUcW1}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
          Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
          Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
             <local:PiceUC.Margin>
@@ -53,7 +60,7 @@
                 </MultiBinding>
             </local:PiceUC.Margin>
         </local:PiceUC>
-        <local:PiceUC x:Name="ShakerPice2" Number="{Binding PiceUcW2.Value}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+        <local:PiceUC x:Name="ShakerPice2" DataContext="{Binding PiceUcW2}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
          Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
          Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
             <local:PiceUC.Margin>
@@ -67,7 +74,7 @@
                 </MultiBinding>
             </local:PiceUC.Margin>
         </local:PiceUC>
-        <local:PiceUC x:Name="ShakerPice3" Number="{Binding PiceUcW3.Value}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+        <local:PiceUC x:Name="ShakerPice3" DataContext="{Binding PiceUcW3}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
          Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
          Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
             <local:PiceUC.Margin>
@@ -81,7 +88,7 @@
                 </MultiBinding>
             </local:PiceUC.Margin>
         </local:PiceUC>
-        <local:PiceUC x:Name="ShakerPice4" Number="{Binding PiceUcW4.Value}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+        <local:PiceUC x:Name="ShakerPice4" DataContext="{Binding PiceUcW4}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
          Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
          Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
             <local:PiceUC.Margin>
@@ -95,7 +102,7 @@
                 </MultiBinding>
             </local:PiceUC.Margin>
         </local:PiceUC>
-        <local:PiceUC x:Name="ShakerPice5" Number="{Binding PiceUcW5.Value}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Padding="0"  VerticalAlignment="Center" HorizontalAlignment="Center"   
+        <local:PiceUC x:Name="ShakerPice5" DataContext="{Binding PiceUcW1}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0"  VerticalAlignment="Center" HorizontalAlignment="Center"   
          Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
          Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
             <local:PiceUC.Margin>

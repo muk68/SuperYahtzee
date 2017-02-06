@@ -9,7 +9,9 @@
              xmlns:controlsViewModels="clr-namespace:SuperYahtzee.Controls.ControlsViewModels"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:mvvm="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
+              AllowDrop="True"
              d:DataContext="{d:DesignInstance controlsViewModels:PiceUCViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="100" d:DesignWidth="100">
     <UserControl.Resources>
@@ -30,7 +32,19 @@
         </Border.LayoutTransform>
         <Border   BorderThickness="0,0,0,0" CornerRadius="8" Padding="0" Margin="1" Background="#FF0D84BB" Visibility="{Binding Path=Visible, Converter={StaticResource booleanToVisibilityConverter}}">
             <Border   BorderThickness="0,0,0,0" CornerRadius="8" Padding="4" Margin="1" Background="{Binding BgColor}" Visibility="{Binding Path=Visible, Converter={StaticResource booleanToVisibilityConverter}}">
-                <Canvas Background="{Binding BgColor}" x:Name="Canvas" Visibility="{Binding Path=Visible, Converter={StaticResource booleanToVisibilityConverter}}" >
+                <Canvas Background="{Binding BgColor}" x:Name="Canvas" Visibility="{Binding Path=Visible, Converter={StaticResource booleanToVisibilityConverter}}" AllowDrop="True" >
+                    <i:Interaction.Behaviors></i:Interaction.Behaviors>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding Path=MouseDownCommand}" CommandParameter="{Binding Value}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding Path=MouseUpCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="DragOver">
+                            <i:InvokeCommandAction Command="{Binding Path=MouseMoveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <Ellipse Name="LeftTopBull" Fill="{DynamicResource PiceEyeBrush}"
                               Height="{Binding Converter={StaticResource PercentageConverter},ElementName=Canvas, Path=ActualHeight, ConverterParameter={StaticResource BullSizeFactor}}" 
                               Width="{Binding Converter={StaticResource PercentageConverter},ElementName=Canvas, Path=ActualWidth, ConverterParameter={StaticResource BullSizeFactor}}">
