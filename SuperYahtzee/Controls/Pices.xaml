@@ -3,20 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mvvm:ViewModelLocator.AutoWireViewModel="True"
+            
              xmlns:local="clr-namespace:SuperYahtzee.Controls"
              xmlns:controlsViewModels="clr-namespace:SuperYahtzee.Controls.ControlsViewModels"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:mvvm="http://prismlibrary.com/"
+             
+             xmlns:dragDrop="clr-namespace:DragDrop;assembly=DragDrop"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance controlsViewModels:PicesViewModel, IsDesignTimeCreatable=True}"
-             AllowDrop="True"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
+        <local:DragPreviewPice x:Key="DragPreviewPice" />
         <local:PercentageConverter x:Key="PercentageConverter"/>
         <local:MarginConverter x:Key="MarginConverter"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid Name="PicesControl">
         <Grid.RowDefinitions>
             <RowDefinition Height="{Binding ActualHeight, ElementName=ShakerPice1}"  MinHeight="50" Name="HeaderRow"/>
             <RowDefinition Height="*" Name="MainRow"/>
@@ -46,10 +47,10 @@
                 <RotateTransform CenterX="0.5" CenterY="0.5" Angle="{Binding Path=Angle, UpdateSourceTrigger=PropertyChanged}"/>
             </Ellipse.LayoutTransform>
         </Ellipse>
-        <local:PiceUC x:Name="ShakerPice1" DataContext="{Binding PiceUcW1}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
-         Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
-         Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
-            <local:PiceUC.Margin>
+        <Canvas Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1"
+                Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
+                Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
+            <Canvas.Margin>
                 <MultiBinding Converter="{StaticResource MarginConverter}">
                     <Binding ElementName="Shaker" Path="ActualWidth" />
                     <Binding>
@@ -58,12 +59,18 @@
                         </Binding.Source>
                     </Binding>
                 </MultiBinding>
-            </local:PiceUC.Margin>
-        </local:PiceUC>
-        <local:PiceUC x:Name="ShakerPice2" DataContext="{Binding PiceUcW2}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+            </Canvas.Margin>
+            <local:PiceUC x:Name="ShakerPice1" DataContext="{Binding PiceUcW1}" Number="{Binding Value}"  Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+                 Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
+                 Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                 dragDrop:DragDrop.IsDragSource="True"
+                 dragDrop:DragDrop.DropTarget="{Binding ElementName=HeaderRow}"
+                 dragDrop:DragDrop.DragDropPreviewControl="{StaticResource DragPreviewPice}" />
+        </Canvas>
+        <Canvas Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1"
          Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
          Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
-            <local:PiceUC.Margin>
+            <Canvas.Margin>
                 <MultiBinding Converter="{StaticResource MarginConverter}">
                     <Binding ElementName="Shaker" Path="ActualWidth" />
                     <Binding>
@@ -72,12 +79,19 @@
                         </Binding.Source>
                     </Binding>
                 </MultiBinding>
-            </local:PiceUC.Margin>
-        </local:PiceUC>
-        <local:PiceUC x:Name="ShakerPice3" DataContext="{Binding PiceUcW3}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+            </Canvas.Margin>
+            <local:PiceUC x:Name="ShakerPice2" DataContext="{Binding PiceUcW2}" Number="{Binding Value}"  Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+                 Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
+                 Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                 dragDrop:DragDrop.IsDragSource="True"
+                 dragDrop:DragDrop.DropTarget="{Binding ElementName=HeaderRow}"
+                 dragDrop:DragDrop.DragDropPreviewControl="{StaticResource DragPreviewPice}"
+                 dragDrop:DragDrop.DragDropContainer="{Binding ElementName=PicesControl}" />
+        </Canvas>
+        <Canvas Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1"
          Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
          Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
-            <local:PiceUC.Margin>
+            <Canvas.Margin>
                 <MultiBinding Converter="{StaticResource MarginConverter}">
                     <Binding ElementName="Shaker" Path="ActualWidth" />
                     <Binding>
@@ -86,12 +100,19 @@
                         </Binding.Source>
                     </Binding>
                 </MultiBinding>
-            </local:PiceUC.Margin>
-        </local:PiceUC>
-        <local:PiceUC x:Name="ShakerPice4" DataContext="{Binding PiceUcW4}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
-         Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
-         Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
-            <local:PiceUC.Margin>
+            </Canvas.Margin>
+            <local:PiceUC x:Name="ShakerPice3" DataContext="{Binding PiceUcW3}" Number="{Binding Value}"  Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+                 Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
+                 Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                 dragDrop:DragDrop.IsDragSource="True"
+                 dragDrop:DragDrop.DropTarget="{Binding ElementName=HeaderRow}"
+                 dragDrop:DragDrop.DragDropPreviewControl="{StaticResource DragPreviewPice}"
+                 dragDrop:DragDrop.DragDropContainer="{Binding ElementName=PicesControl}" />
+        </Canvas>
+        <Canvas Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1"
+             Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
+             Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
+            <Canvas.Margin>
                 <MultiBinding Converter="{StaticResource MarginConverter}">
                     <Binding ElementName="Shaker" Path="ActualWidth" />
                     <Binding>
@@ -100,12 +121,19 @@
                         </Binding.Source>
                     </Binding>
                 </MultiBinding>
-            </local:PiceUC.Margin>
-        </local:PiceUC>
-        <local:PiceUC x:Name="ShakerPice5" DataContext="{Binding PiceUcW1}" Number="{Binding Value}" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Padding="0"  VerticalAlignment="Center" HorizontalAlignment="Center"   
-         Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
-         Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
-            <local:PiceUC.Margin>
+            </Canvas.Margin>
+            <local:PiceUC x:Name="ShakerPice4" DataContext="{Binding PiceUcW4}" Number="{Binding Value}"  Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+                 Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
+                 Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                 dragDrop:DragDrop.IsDragSource="True"
+                 dragDrop:DragDrop.DropTarget="{Binding ElementName=HeaderRow}"
+                 dragDrop:DragDrop.DragDropPreviewControl="{StaticResource DragPreviewPice}"
+                 dragDrop:DragDrop.DragDropContainer="{Binding ElementName=PicesControl}" />
+        </Canvas>
+        <Canvas Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1"
+             Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
+             Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}">
+            <Canvas.Margin>
                 <MultiBinding Converter="{StaticResource MarginConverter}">
                     <Binding ElementName="Shaker" Path="ActualWidth" />
                     <Binding>
@@ -114,7 +142,14 @@
                         </Binding.Source>
                     </Binding>
                 </MultiBinding>
-            </local:PiceUC.Margin>
-        </local:PiceUC>
+            </Canvas.Margin>
+            <local:PiceUC x:Name="ShakerPice5" DataContext="{Binding PiceUcW1}" Number="{Binding Value}"  Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"   
+                 Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=Shaker, Path=ActualWidth, ConverterParameter=0.25}"
+                 Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                 dragDrop:DragDrop.IsDragSource="True"
+                 dragDrop:DragDrop.DropTarget="{Binding ElementName=HeaderRow}"
+                 dragDrop:DragDrop.DragDropPreviewControl="{StaticResource DragPreviewPice}"
+                 dragDrop:DragDrop.DragDropContainer="{Binding ElementName=PicesControl}" />
+        </Canvas>
     </Grid>
 </UserControl>

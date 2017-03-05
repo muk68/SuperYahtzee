@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
-using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using SuperYahtzee.Common;
@@ -12,11 +10,11 @@ namespace SuperYahtzee.Controls.ControlsViewModels
 {
     public class PiceUCViewModel : BindableBase
     {
-        public DelegateCommand<object> MouseDownCommand { get; }
+        //public DelegateCommand<object> MouseDownCommand { get; }
 
-        public DelegateCommand<object> MouseUpCommand { get; }
+        //public DelegateCommand<object> MouseUpCommand { get; }
 
-        public DelegateCommand<object> MouseMoveCommand { get; }
+        //public DelegateCommand<object> MouseMoveCommand { get; }
 
         //private EventHandler _endRunningRandomizer; // the underlying field
         //                                            // this isn't actually named "_MyEvent" but also "MyEvent",
@@ -83,25 +81,25 @@ namespace SuperYahtzee.Controls.ControlsViewModels
             Visible = true;
             IsRunningRandomizer = false;
 
-            MouseDownCommand = new DelegateCommand<object>(HandleMouseDownCommand);
-            MouseUpCommand = new DelegateCommand<object>(HandleMouseUpCommand);
-            MouseMoveCommand = new DelegateCommand<object>(HandleMouseMoveCommand);
+            //MouseDownCommand = new DelegateCommand<object>(HandleMouseDownCommand);
+            //MouseUpCommand = new DelegateCommand<object>(HandleMouseUpCommand);
+            //MouseMoveCommand = new DelegateCommand<object>(HandleMouseMoveCommand);
         }
 
-        public void HandleMouseDownCommand(object arg)
-        {
+        //public void HandleMouseDownCommand(object arg)
+        //{
             
-        }
+        //}
 
-        public void HandleMouseUpCommand(object arg)
-        {
+        //public void HandleMouseUpCommand(object arg)
+        //{
 
-        }
+        //}
 
-        private void HandleMouseMoveCommand(object arg)
-        {
+        //private void HandleMouseMoveCommand(object arg)
+        //{
 
-        }
+        //}
 
         public void StartRandom(int seed)
         {

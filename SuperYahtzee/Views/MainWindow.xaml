@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:SuperYahtzee.Controls" x:Class="SuperYahtzee.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="430.553" Width="525">
     <Grid>
 
         <controls:PiceUC Number="{Binding Value, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="26,44,341,125" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center" MinHeight="75" MinWidth="75" DataContext="{Binding PiceUC}" Height="150" Width="150" />
@@ -15,6 +15,7 @@
         </controls:Pice>
         <Button x:Name="Button"  Content="Start/Stop" HorizontalAlignment="Left" Margin="88,225,0,0" VerticalAlignment="Top" Width="75" Command="{Binding StartStopCommand}" />
         <controls:Pices HorizontalAlignment="Stretch" Margin="181,75,0,0" VerticalAlignment="Stretch" DataContext="{Binding Pices}"  />
+        <controls:DragPreviewPice HorizontalAlignment="Left" Height="100" Margin="36,283,0,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Window>

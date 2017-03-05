@@ -1,0 +1,45 @@
+﻿<dd:DragDropPreviewBase x:Class="SuperYahtzee.Controls.DragPreviewPice"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dd="clr-namespace:DragDrop;assembly=DragDrop"
+             xmlns:controls="clr-namespace:SuperYahtzee.Controls"
+             xmlns:controlsViewModels="clr-namespace:SuperYahtzee.Controls.ControlsViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance controlsViewModels:PiceUCViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="100" d:DesignWidth="100">
+    <dd:DragDropPreviewBase.Resources>
+
+        <!--<Storyboard x:Key="LoadAni">
+            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.25" AccelerationRatio=".1" DecelerationRatio=".9" From="0" To="0.25" Storyboard.TargetName="Pice" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"/>
+            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.25" AccelerationRatio=".1" DecelerationRatio=".9" From="0" To="0.25" Storyboard.TargetName="Pice" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" />
+            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.25" AccelerationRatio=".1" DecelerationRatio=".9" From="0" To="0.8" Storyboard.TargetName="Pice" Storyboard.TargetProperty="(UIElement.Opacity)" />
+        </Storyboard>-->
+
+    </dd:DragDropPreviewBase.Resources>
+    <dd:DragDropPreviewBase.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+            <SkewTransform AngleX="0" AngleY="0"/>
+            <RotateTransform Angle="0"/>
+            <TranslateTransform X="0" Y="0"/>
+        </TransformGroup>
+    </dd:DragDropPreviewBase.RenderTransform>
+    <!--<dd:DragDropPreviewBase.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource LoadAni}"/>
+        </EventTrigger>
+    </dd:DragDropPreviewBase.Triggers>-->
+    <Grid Name="Pice" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                <SkewTransform AngleX="0" AngleY="0"/>
+                <RotateTransform Angle="0"/>
+                <TranslateTransform X="0" Y="0"/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <controls:PiceUC  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Number="{Binding Value}"  />
+    </Grid>
+</dd:DragDropPreviewBase>
